@@ -7,6 +7,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { NotFoundModule } from './modules/not-found/not-found.module';
+import { HomeModule } from './modules/home/home.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +19,8 @@ import { AuthModule } from './modules/auth/auth.module';
     CoreModule,
     SharedModule,
     AuthModule,
+    NotFoundModule,
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

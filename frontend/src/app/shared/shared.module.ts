@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { HeaderComponent } from './components/header/header.component';
 
@@ -16,6 +19,9 @@ import { HeaderComponent } from './components/header/header.component';
     MatButtonModule,
     MatSliderModule,
     MatChipsModule,
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule,
   ], //TODO: add more modules here
 })
 export class SharedModule {}

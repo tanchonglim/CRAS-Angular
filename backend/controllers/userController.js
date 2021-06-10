@@ -1,6 +1,11 @@
 const User = require("../models/user");
 
-module.exports.getUsers = async (req, res) => {
-  const result = await User.get();
-  res.json(result);
-};
+class UserController {
+  getUser = async (req, res) => {
+    const user = req.user;
+    const result = await User.getById(user.userID);
+    res.json(result);
+  };
+}
+
+module.exports = new UserController();

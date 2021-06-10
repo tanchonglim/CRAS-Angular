@@ -1,1 +1,17 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <a mat-button [routerLink]="'home'"> <h1>CRAS</h1></a>
+    <span class="flex-space-between">
+      <div>
+        <a mat-button [routerLink]="'home'"> Home </a>
+      </div>
+      <div>
+        <a mat-raised-button [routerLink]="'login'" color="primary">Login</a>
+        <a mat-stroked-button [routerLink]="'register'" color="primary"
+          >Register</a
+        >
+      </div>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
 <router-outlet></router-outlet>

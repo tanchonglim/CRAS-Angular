@@ -1,4 +1,5 @@
 const database = require("../db");
+const crypto = require("crypto");
 
 class User {
   constructor() {
@@ -10,18 +11,46 @@ class User {
     const rows = await database.query(
       "SELECT userID, username, email, addedDate, userType, studentID FROM user"
     );
+
     return this.rowToArray(rows);
   }
 
-  async getById(id) {
-    const rows = await database.query(
-      "SELECT userID, username, email, addedDate, userType, studentID  FROM user WHERE id = ?",
-      [id]
-    );
+  async getById(userID) {
+    const rows = await database.query("SELECT * FROM user WHERE userID = ?", [
+      userID,
+    ]);
     return this.rowToArray(rows[0]);
   }
 
-  async create(user) {}
+  async getByUsername(username) {
+    const rows = await database.query("SELECT * FROM user WHERE username = ?", [
+      username,
+    ]);
+    return this.rowToArray(rows[0]);
+  }
+
+  async register(user) {
+    try {
+      //TODO: need to be fixed
+      const rows = await database.query(
+        "INSERT INTO student(name, matricNo) values(?, ?); " +
+          "SET @id = LAST_INSERT_ID(); " +
+          "INSERT INTO user(username, email, password, salt, userType, studentID, addedDate)" +
+          "values(?, ?, ?, ?, ?, @id, NOW());",
+        [
+          user.name,
+          user.matricNo,
+          user.username,
+          user.email,
+          user.password,
+          user.salt,
+          user.userType,
+        ]
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async update(id, user) {
     // const fields = []
@@ -33,8 +62,28 @@ class User {
     // const stmt = `UPDATE todos SET ${fields.join(', ')} WHERE id = ?`
     // return database.query(stmt, [...params, parseInt(id)])
   }
+
   rowToArray(sqlRows) {
+    if (!sqlRows) return null;
     return JSON.parse(JSON.stringify(sqlRows));
+  }
+
+  validatePasswordHash(password, hashedPassword, salt) {
+    return (
+      crypto
+        .createHash("sha512")
+        .update(password + salt)
+        .digest("hex") == hashedPassword
+    );
+  }
+
+  createPasswordHashAndSalt(password) {
+    const salt = crypto.randomBytes(15).toString("hex");
+    const passwordHashed = crypto
+      .createHash("sha512")
+      .update(password + salt)
+      .digest("hex");
+    return { passwordHashed: passwordHashed, salt: salt };
   }
 }
 
