@@ -4,7 +4,7 @@ const router = express.Router();
 
 const UserController = require("../controllers/userController");
 
-//get own user
+//get current logged in user's data
 router.get("/", UserAuthMiddleware, UserController.getUser);
 
 module.exports = router;

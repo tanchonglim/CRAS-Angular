@@ -7,12 +7,13 @@ class AuthController {
     try {
       const username = req.body.username;
       const password = req.body.password;
+
       const user = await User.getByUsername(username);
       if (!user) {
-        return res.json({ message: "Incorrect username." });
+        return res.json({ message: "Incorrect username.", status: "failed" });
       }
       if (!User.validatePasswordHash(password, user.password, user.salt)) {
-        return res.json({ message: "Incorrect password." });
+        return res.json({ message: "Incorrect password.", status: "failed" });
       }
 
       const body = {
@@ -25,7 +26,32 @@ class AuthController {
       const token = jwt.sign({ user: body }, process.env.JWT_SECRET, {
         expiresIn: "1d",
       });
-      res.json({ userID: user.userID, jwt: token });
+      res.json({ userID: user.userID, jwt: token, status: "success" });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  validateDuplicate = async (req, res, next) => {
+    try {
+      const isEmailDuplicate = (await User.getByEmail(req.body.email)) != null;
+      const isUsernameDuplicate =
+        (await User.getByUsername(req.body.username)) != null;
+      const isMatricNoDuplicate =
+        (await User.getByMatric(req.body.matricNo)) != null;
+
+      if (isEmailDuplicate || isUsernameDuplicate || isMatricNoDuplicate) {
+        let message;
+        if (isEmailDuplicate) message = "Email already exists";
+        if (isUsernameDuplicate) message = "Username already exists";
+        if (isMatricNoDuplicate) message = "Matric Number already exists";
+        return res.json({
+          statue: "failed",
+          message: message,
+        });
+      } else {
+        return next();
+      }
     } catch (error) {
       return next(error);
     }
@@ -64,7 +90,7 @@ class AuthController {
         expiresIn: "1d",
       });
 
-      return res.json({ userID: result.userID, jwt: token });
+      return res.json({ userID: result.userID, jwt: token, status: "success" });
     } catch (error) {
       if (error.code == "ER_DUP_ENTRY") {
         const sqlMessage = error.sqlMessage;
@@ -76,7 +102,7 @@ class AuthController {
         if (sqlMessage.includes("email"))
           message = "Email Number Already Exists";
 
-        return res.json({ message: message });
+        return res.json({ status: "failed", message: message });
       }
       return next(error);
     }

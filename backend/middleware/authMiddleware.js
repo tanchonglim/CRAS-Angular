@@ -1,5 +1,14 @@
 const jwt = require("jsonwebtoken");
 
+// example req.user:
+// {
+//   userID: 1,
+//   username: 'admin',
+//   email: 'admin@admin.com',
+//   userType: 'admin',
+//   studentID: null
+// }
+
 module.exports.UserAuthMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {

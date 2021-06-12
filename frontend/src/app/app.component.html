@@ -2,15 +2,32 @@
   <mat-toolbar-row>
     <a mat-button [routerLink]="'home'"> <h1>CRAS</h1></a>
     <span class="flex-space-between">
-      <div>
-        <a mat-button [routerLink]="'home'"> Home </a>
-      </div>
-      <div>
-        <a mat-raised-button [routerLink]="'login'" color="primary">Login</a>
-        <a mat-stroked-button [routerLink]="'register'" color="primary"
-          >Register</a
-        >
-      </div>
+      <!-- Not logged in -->
+      <ng-container *ngIf="!(authService.$isLoggedIn | async)">
+        <div></div>
+        <div>
+          <a mat-raised-button [routerLink]="'login'" color="primary">
+            Login
+          </a>
+          <a mat-stroked-button [routerLink]="'register'" color="primary">
+            Register
+          </a>
+        </div>
+      </ng-container>
+      <!-- Logged in -->
+      <ng-container *ngIf="authService.$isLoggedIn | async">
+        <div *ngIf="authService.$isAdmin | async">
+          <a mat-button [routerLink]="'/admin/home'"> Home </a>
+        </div>
+        <div *ngIf="!(authService.$isAdmin | async)">
+          <a mat-button [routerLink]="'/student/home'"> Home </a>
+        </div>
+
+        <div>
+          <span>Hi {{ (authService.$user | async)?.username }} </span>
+          <a mat-raised-button (click)="logOut()" color="warn"> Logout </a>
+        </div>
+      </ng-container>
     </span>
   </mat-toolbar-row>
 </mat-toolbar>

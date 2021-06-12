@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { NotFoundModule } from './modules/not-found/not-found.module';
 import { HomeModule } from './modules/home/home.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JWTHttpInterceptor } from './core/jwt-http-interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +24,13 @@ import { HomeModule } from './modules/home/home.module';
     NotFoundModule,
     HomeModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JWTHttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

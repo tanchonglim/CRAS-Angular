@@ -29,10 +29,26 @@ class User {
     return this.rowToArray(rows[0]);
   }
 
+  async getByMatric(matricNo) {
+    const rows = await database.query(
+      "SELECT * FROM student WHERE matricNo = ?",
+      [matricNo]
+    );
+    return this.rowToArray(rows[0]);
+  }
+
+  async getByEmail(email) {
+    const rows = await database.query("SELECT * FROM user WHERE email = ?", [
+      email,
+    ]);
+    return this.rowToArray(rows[0]);
+  }
+
   async register(user) {
     try {
+      console.log(user);
       //TODO: need to be fixed
-      const rows = await database.query(
+      await database.query(
         "INSERT INTO student(name, matricNo) values(?, ?); " +
           "SET @id = LAST_INSERT_ID(); " +
           "INSERT INTO user(username, email, password, salt, userType, studentID, addedDate)" +
