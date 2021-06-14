@@ -16,7 +16,7 @@ export class AuthService {
   jwt: string = '';
   private userSubject = new BehaviorSubject<User | null>(null);
 
-  get $user() {
+  get user$() {
     return this.userSubject.asObservable();
   }
 
@@ -24,12 +24,12 @@ export class AuthService {
     return this.helper.isTokenExpired(this.jwt);
   }
 
-  get $isLoggedIn() {
-    return this.$user.pipe(map((user) => user != null));
+  get isLoggedIn$() {
+    return this.user$.pipe(map((user) => user != null));
   }
 
-  get $isAdmin() {
-    return this.$user.pipe(map((user) => user?.userType == 'admin'));
+  get isAdmin$() {
+    return this.user$.pipe(map((user) => user?.userType == 'admin'));
   }
 
   constructor(private http: HttpClient) {}

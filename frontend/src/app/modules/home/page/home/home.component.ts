@@ -16,10 +16,10 @@ export class HomeComponent implements OnInit {
   }
 
   async redirect() {
-    const isLoggedIn = await this.authService.$isLoggedIn
+    const isLoggedIn = await this.authService.isLoggedIn$
       .pipe(take(1))
       .toPromise();
-    const isAdmin = await this.authService.$isAdmin.pipe(take(1)).toPromise();
+    const isAdmin = await this.authService.isAdmin$.pipe(take(1)).toPromise();
     if (isLoggedIn && isAdmin) return this.router.navigate(['/admin/home']);
 
     if (isLoggedIn) return this.router.navigate(['/student/home']);

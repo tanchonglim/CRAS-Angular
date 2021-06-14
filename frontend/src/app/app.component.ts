@@ -16,7 +16,7 @@ export class AppComponent {
     router: Router,
     private snackBar: MatSnackBar
   ) {
-    authService.$user.subscribe((user) => {
+    authService.user$.subscribe((user) => {
       if (user?.userType == 'student')
         return router.navigate(['/student/home']);
       if (user?.userType == 'admin') return router.navigate(['/admin/home']);

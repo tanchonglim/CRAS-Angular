@@ -3,7 +3,7 @@
     <a mat-button [routerLink]="'home'"> <h1>CRAS</h1></a>
     <span class="flex-space-between">
       <!-- Not logged in -->
-      <ng-container *ngIf="!(authService.$isLoggedIn | async)">
+      <ng-container *ngIf="!(authService.isLoggedIn$ | async)">
         <div></div>
         <div>
           <a mat-raised-button [routerLink]="'login'" color="primary">
@@ -15,16 +15,16 @@
         </div>
       </ng-container>
       <!-- Logged in -->
-      <ng-container *ngIf="authService.$isLoggedIn | async">
-        <div *ngIf="authService.$isAdmin | async">
+      <ng-container *ngIf="authService.isLoggedIn$ | async">
+        <div *ngIf="authService.isAdmin$ | async">
           <a mat-button [routerLink]="'/admin/home'"> Home </a>
         </div>
-        <div *ngIf="!(authService.$isAdmin | async)">
+        <div *ngIf="!(authService.isAdmin$ | async)">
           <a mat-button [routerLink]="'/student/home'"> Home </a>
         </div>
 
         <div>
-          <span>Hi {{ (authService.$user | async)?.username }} </span>
+          <span>Hi {{ (authService.user$ | async)?.username }} </span>
           <a mat-raised-button (click)="logOut()" color="warn"> Logout </a>
         </div>
       </ng-container>
