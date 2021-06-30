@@ -5,6 +5,7 @@ const authRoute = require("./routes/auth");
 const db = require("./db");
 const collegeRoute = require("./routes/college");
 const roomRoute = require("./routes/room");
+const applicationRoute = require("./routes/application");
 
 const app = express();
 const port = 3000;
@@ -21,6 +22,7 @@ app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/college", collegeRoute);
 app.use("/room", roomRoute);
+app.use("/application", applicationRoute);
 
 app.listen(port, () =>
   console.log(`Server started at http://localhost:${3000}`)

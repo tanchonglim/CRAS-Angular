@@ -1,7 +1,7 @@
 import { RoomModule } from './modules/room/room.module';
 import { CollegeModule } from './modules/college/college.module';
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ApplicationModule } from './modules/application/application.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { HomeModule } from './modules/home/home.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JWTHttpInterceptor } from './core/jwt-http-interceptor';
 import { ProfileModule } from './modules/profile/profile.module';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { ProfileModule } from './modules/profile/profile.module';
     ProfileModule,
     CollegeModule,
     RoomModule,
+    ApplicationModule
   ],
   providers: [
     {
