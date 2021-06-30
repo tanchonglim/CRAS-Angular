@@ -1,3 +1,5 @@
+import { RoomModule } from './modules/room/room.module';
+import { CollegeModule } from './modules/college/college.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -25,6 +27,8 @@ import { ProfileModule } from './modules/profile/profile.module';
     NotFoundModule,
     HomeModule,
     ProfileModule,
+    CollegeModule,
+    RoomModule,
   ],
   providers: [
     {

@@ -1,3 +1,4 @@
+import { MatTableModule } from '@angular/material/table';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -35,6 +37,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSnackBarModule,
     MatMenuModule,
     MatDialogModule,
+    MatTableModule,
+    MatSelectModule,
   ], //TODO: add more modules here
 })
 export class SharedModule {}

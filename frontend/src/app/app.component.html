@@ -18,6 +18,8 @@
       <ng-container *ngIf="authService.isLoggedIn$ | async">
         <div *ngIf="authService.isAdmin$ | async">
           <a mat-button [routerLink]="'/admin/home'"> Home </a>
+          <a mat-button [routerLink]="'/admin/college'"> College </a>
+          <a mat-button [routerLink]="'/admin/application'"> Application </a>
         </div>
         <div *ngIf="!(authService.isAdmin$ | async)">
           <a mat-button [routerLink]="'/student/home'"> Home </a>
