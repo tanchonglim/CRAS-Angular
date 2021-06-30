@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 // {
 //   userID: 1,
 //   username: 'admin',
-//   email: 'admin@admin.com',
 //   userType: 'admin',
 //   studentID: null
 // }

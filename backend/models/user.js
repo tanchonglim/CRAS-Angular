@@ -16,9 +16,17 @@ class User {
   }
 
   async getById(userID) {
-    const rows = await database.query("SELECT * FROM user WHERE userID = ?", [
-      userID,
-    ]);
+    let rows;
+    if (userID == 1)
+      rows = await database.query("SELECT * FROM user WHERE userID = ? ", [
+        userID,
+      ]);
+    else
+      rows = await database.query(
+        "SELECT * FROM user INNER JOIN student ON student.studentID=user.studentID WHERE user.userID = ? ",
+        [userID]
+      );
+
     return this.rowToArray(rows[0]);
   }
 
@@ -46,8 +54,6 @@ class User {
 
   async register(user) {
     try {
-      console.log(user);
-      //TODO: need to be fixed
       await database.query(
         "INSERT INTO student(name, matricNo) values(?, ?); " +
           "SET @id = LAST_INSERT_ID(); " +
@@ -68,16 +74,53 @@ class User {
     }
   }
 
-  async update(id, user) {
-    // const fields = []
-    // const params = []
-    // for (const attribute in todo) {
-    //     fields.push('?? = ?')
-    //     params.push(attribute, todo[attribute])
-    // }
-    // const stmt = `UPDATE todos SET ${fields.join(', ')} WHERE id = ?`
-    // return database.query(stmt, [...params, parseInt(id)])
+  async updateEmailandName(studentId, name, email) {
+    try {
+      await database.query(
+        "UPDATE student SET name = ? WHERE studentID = ?;" +
+          "UPDATE user SET email = ? WHERE studentID = ?;",
+        [name, studentId, email, studentId]
+      );
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
+
+  async updatePassword(userId, password, salt) {
+    try {
+      await database.query(
+        "UPDATE user SET password = ? , salt = ? WHERE userID = ?;",
+        [password, salt, userId]
+      );
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async updateProfileImage(studentId, imageName) {
+    try {
+      await database.query(
+        "UPDATE student SET imagePath = ?  WHERE studentID = ?;",
+        [imageName, studentId]
+      );
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  // async update(id, user) {
+  //   const fields = []
+  //   const params = []
+  //   for (const attribute in user) {
+  //       fields.push('?? = ?')
+  //       params.push(attribute, todo[attribute])
+  //   }
+  //   const stmt = `UPDATE todos SET ${fields.join(', ')} WHERE id = ?`
+  //   return database.query(stmt, [...params, parseInt(id)])
+  // }
 
   rowToArray(sqlRows) {
     if (!sqlRows) return null;

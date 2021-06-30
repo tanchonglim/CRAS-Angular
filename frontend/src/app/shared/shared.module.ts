@@ -13,6 +13,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -31,6 +33,8 @@ import { AppRoutingModule } from '../app-routing.module';
     MatInputModule,
     MatCardModule,
     MatSnackBarModule,
+    MatMenuModule,
+    MatDialogModule,
   ], //TODO: add more modules here
 })
 export class SharedModule {}

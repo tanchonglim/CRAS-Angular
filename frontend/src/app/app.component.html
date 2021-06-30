@@ -23,9 +23,35 @@
           <a mat-button [routerLink]="'/student/home'"> Home </a>
         </div>
 
-        <div>
-          <span>Hi {{ (authService.user$ | async)?.username }} </span>
-          <a mat-raised-button (click)="logOut()" color="warn"> Logout </a>
+        <div class="profile-btn">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <img
+              [src]="
+                (authService.user$ | async)?.imagePath ||
+                'http://localhost:3000/default.png'
+              "
+              alt="profile image"
+              class="profile-img"
+            />
+            {{ (authService.user$ | async)?.username }}
+            <mat-icon>arrow_drop_down</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button
+              *ngIf="!(authService.isAdmin$ | async)"
+              mat-menu-item
+              routerLink="/profile"
+            >
+              <mat-icon>account_circle</mat-icon>
+              <span> My Profile</span>
+            </button>
+            <span class="logout-btn-container">
+              <button mat-raised-button (click)="logOut()" color="warn">
+                Log Out
+              </button>
+            </span>
+          </mat-menu>
         </div>
       </ng-container>
     </span>

@@ -9,6 +9,7 @@ import { AdminHomeComponent } from './modules/home/page/admin-home/admin-home.co
 import { HomeComponent } from './modules/home/page/home/home.component';
 import { StudentHomeComponent } from './modules/home/page/student-home/student-home.component';
 import { NotFoundComponent } from './modules/not-found/page/not-found/not-found.component';
+import { ProfileComponent } from './modules/profile/page/profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'student/home',
     component: StudentHomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [AuthGuard],
   },
 

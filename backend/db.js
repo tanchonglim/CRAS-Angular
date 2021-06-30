@@ -18,6 +18,16 @@ class Database {
     });
   }
 
+  testConnection() {
+    this.pool.query("SELECT 1", (ex, rows) => {
+      if (ex) {
+        console.log("Connection to database FAILED");
+      } else {
+        console.log("Connected to database");
+      }
+    });
+  }
+
   query(sql, params) {
     return new Promise((resolve, reject) => {
       this.pool.query(sql, params, (err, result) => {

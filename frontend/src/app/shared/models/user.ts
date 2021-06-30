@@ -3,5 +3,8 @@ export interface User {
   username: string;
   email: string;
   userType: string;
-  studentId: string;
+  studentId?: string;
+  matricNo?: string;
+  name?: string;
+  imagePath?: string;
 }

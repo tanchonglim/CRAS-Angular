@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from './core/auth.service';
+import { UserService } from './shared/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent {
 
   constructor(
     public authService: AuthService,
+    public userService: UserService,
     router: Router,
     private snackBar: MatSnackBar
   ) {

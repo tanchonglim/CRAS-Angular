@@ -11,6 +11,7 @@ import { NotFoundModule } from './modules/not-found/not-found.module';
 import { HomeModule } from './modules/home/home.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JWTHttpInterceptor } from './core/jwt-http-interceptor';
+import { ProfileModule } from './modules/profile/profile.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { JWTHttpInterceptor } from './core/jwt-http-interceptor';
     AuthModule,
     NotFoundModule,
     HomeModule,
+    ProfileModule,
   ],
   providers: [
     {
