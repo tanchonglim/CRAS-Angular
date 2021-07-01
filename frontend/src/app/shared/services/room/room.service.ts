@@ -63,4 +63,10 @@ export class RoomService {
       })
       .toPromise();
   }
+
+  updateRoomOccupied(roomId: string) {
+    return this.http
+      .put<Room>(`${this.apiUrl}/room/updateOccupied/${roomId}`, {})
+      .toPromise();
+  }
 }

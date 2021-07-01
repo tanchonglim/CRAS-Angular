@@ -3,8 +3,9 @@ export interface User {
   username: string;
   email: string;
   userType: string;
-  studentId?: string;
+  studentID?: string;
   matricNo?: string;
   name?: string;
   imagePath?: string;
+  application?: number;
 }

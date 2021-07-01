@@ -24,3 +24,7 @@ a {
   display: flex;
   justify-content: center;
 }
+
+.active{
+  color:#673ab7
+}

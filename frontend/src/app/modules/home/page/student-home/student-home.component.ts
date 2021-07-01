@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from './../../../../shared/services/user.service';
+import { User } from './../../../../shared/models/user';
 
 @Component({
   selector: 'app-student-home',
@@ -6,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-home.component.css'],
 })
 export class StudentHomeComponent implements OnInit {
-  constructor() {}
+  user?: User;
+  constructor(private userService: UserService) {}
 
-  ngOnInit(): void {}
+  async ngOnInit(): Promise<void> {
+    this.user = await this.userService.getCurrentUser;
+  }
 }

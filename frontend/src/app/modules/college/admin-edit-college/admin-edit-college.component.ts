@@ -43,12 +43,9 @@ export class AdminEditCollegeComponent implements OnInit {
       this.collegeNameFormControl.value,
       this.addressFormControl.value
     );
-    this.router.navigate(['/admin/college']).then((navigated: boolean) => {
-      if (navigated) {
-        this.matSnackBar.open('A college has been updated successfully', '', {
-          duration: 5000,
-        });
-      }
+    this.matSnackBar.open('A college has been updated successfully', '', {
+      duration: 5000,
     });
+    this.router.navigate(['/admin/college']);
   }
 }

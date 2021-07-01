@@ -19,6 +19,10 @@ import { NotFoundComponent } from './modules/not-found/page/not-found/not-found.
 import { ProfileComponent } from './modules/profile/page/profile/profile.component';
 import { AdminApplicationHistoryComponent } from './modules/application/admin-application-history/admin-application-history.component';
 
+import { StudentApplicationHistoryComponent } from './modules/application/student-application-history/student-application-history.component';
+import { StudentApplicationRoomComponent } from './modules/application/student-application-room/student-application-room.component';
+import { StudentApplicationCollegeComponent } from './modules/application/student-application-college/student-application-college.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -83,6 +87,21 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'student/application/college',
+    component: StudentApplicationCollegeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'student/application/room',
+    component: StudentApplicationRoomComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'student/application/history',
+    component: StudentApplicationHistoryComponent,
+    canActivate: [AuthGuard],
+  },
 
   // TODO: more paths add above
   { path: '**', redirectTo: 'notFound' },
@@ -90,7 +109,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes)],  
+exports: [RouterModule],
 })
 export class AppRoutingModule {}

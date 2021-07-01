@@ -45,5 +45,11 @@ class RoomController {
     const result = await Room.changeActivation(id, activated);
     res.json(result);
   };
+
+  updateOccupied = async (req, res) => {
+    const id = req.params["id"];
+    const result = await Room.updateOccupied(id);
+    res.json(result);
+  };
 }
 module.exports = new RoomController();

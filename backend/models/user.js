@@ -144,6 +144,18 @@ class User {
       .digest("hex");
     return { passwordHashed: passwordHashed, salt: salt };
   }
+
+  async updateStudentApplicationStatus(studentId) {
+    try {
+      await database.query(
+        "UPDATE student SET application = ?  WHERE studentID = ?;",
+        [1, studentId]
+      );
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }
 
 module.exports = new User();

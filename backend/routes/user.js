@@ -11,5 +11,9 @@ router.get("/", UserController.getUser);
 router.post("/updateEmailAndName", UserController.updateEmailandName);
 router.post("/updatePassword", UserController.updatePassword);
 router.post("/updateImage", imageUploadMiddleware, UserController.updateImage);
+router.put(
+  "/updateApplicationStatus",
+  UserController.updateStudentApplicationStatus
+);
 
 module.exports = router;

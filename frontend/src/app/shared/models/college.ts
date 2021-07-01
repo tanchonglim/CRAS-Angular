@@ -3,4 +3,5 @@ export interface College {
   collegeName: string;
   address: string;
   addedDate: Date;
+  totalAvailable: number;
 }

@@ -61,6 +61,15 @@ class Room {
     if (!sqlRows) return null;
     return JSON.parse(JSON.stringify(sqlRows));
   }
+
+  async updateOccupied(id) {
+    const rows = await database.query(
+      "UPDATE room SET occupied = occupied + 1 WHERE roomID = ?",
+      [id]
+    );
+
+    return this.rowToArray(rows);
+  }
 }
 
 module.exports = new Room();

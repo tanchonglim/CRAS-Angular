@@ -41,4 +41,10 @@ export class UserService {
       .post<string>(`${this.apiUrl}/user/updateImage`, uploadData)
       .toPromise();
   }
+
+  updateStudentApplicationStatus() {
+    return this.http
+      .put<string>(`${this.apiUrl}/user/updateApplicationStatus`, {})
+      .toPromise();
+  }
 }

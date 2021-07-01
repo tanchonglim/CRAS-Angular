@@ -43,6 +43,13 @@ class UserController {
     if (!isSuccess) return res.json("");
     return res.json(`http://${host}/${fileName}`);
   };
+
+  updateStudentApplicationStatus = async (req, res) => {
+    const result = await User.updateStudentApplicationStatus(
+      req.user.studentID
+    );
+    res.json(result);
+  };
 }
 
 module.exports = new UserController();

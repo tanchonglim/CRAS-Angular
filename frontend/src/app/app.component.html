@@ -1,6 +1,8 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <a mat-button [routerLink]="'home'"> <h1>CRAS</h1></a>
+    <a mat-button [routerLink]="'home'">
+      <h1>CRAS</h1>
+    </a>
     <span class="flex-space-between">
       <!-- Not logged in -->
       <ng-container *ngIf="!(authService.isLoggedIn$ | async)">
@@ -23,6 +25,13 @@
         </div>
         <div *ngIf="!(authService.isAdmin$ | async)">
           <a mat-button [routerLink]="'/student/home'"> Home </a>
+          <a mat-button [routerLink]="'/student/application/college'">
+            College Application
+          </a>
+          <a mat-button [routerLink]="'/student/application/history'">
+            Application History</a
+          >
+          <a mat-button [routerLink]="'/profile'"> Profile </a>
         </div>
 
         <div class="profile-btn">
@@ -40,6 +49,22 @@
           </button>
 
           <mat-menu #menu="matMenu">
+            <button
+              *ngIf="!(authService.isAdmin$ | async)"
+              mat-menu-item
+              routerLink="/student/application"
+            >
+              <mat-icon>description</mat-icon>
+              <span> College Application</span>
+            </button>
+            <button
+              *ngIf="!(authService.isAdmin$ | async)"
+              mat-menu-item
+              routerLink="/student/application/history"
+            >
+              <mat-icon>history</mat-icon>
+              <span> Application History</span>
+            </button>
             <button
               *ngIf="!(authService.isAdmin$ | async)"
               mat-menu-item

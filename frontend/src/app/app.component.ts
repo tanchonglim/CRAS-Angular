@@ -11,6 +11,7 @@ import { UserService } from './shared/services/user.service';
 })
 export class AppComponent {
   links = ['home'];
+  isActive:number = 0;
 
   constructor(
     public authService: AuthService,
@@ -30,5 +31,9 @@ export class AppComponent {
   logOut() {
     this.authService.logout();
     this.snackBar.open('Logged out', '', { duration: 1500 });
+  }
+
+  changeActive(index:number){
+    this.isActive = index;
   }
 }
