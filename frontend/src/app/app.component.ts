@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from './core/auth.service';
+import { User } from './shared/models/user';
 import { UserService } from './shared/services/user.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { UserService } from './shared/services/user.service';
 })
 export class AppComponent {
   links = ['home'];
-  isActive:number = 0;
+  isActive: number = 0;
 
   constructor(
     public authService: AuthService,
@@ -33,7 +34,8 @@ export class AppComponent {
     this.snackBar.open('Logged out', '', { duration: 1500 });
   }
 
-  changeActive(index:number){
+  async ngOnInit() {}
+  changeActive(index: number) {
     this.isActive = index;
   }
 }

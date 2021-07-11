@@ -36,14 +36,6 @@
 
         <div class="profile-btn">
           <button mat-button [matMenuTriggerFor]="menu">
-            <img
-              [src]="
-                (authService.user$ | async)?.imagePath ||
-                'http://localhost:3000/default.png'
-              "
-              alt="profile image"
-              class="profile-img"
-            />
             {{ (authService.user$ | async)?.username }}
             <mat-icon>arrow_drop_down</mat-icon>
           </button>

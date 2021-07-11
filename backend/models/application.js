@@ -31,15 +31,11 @@ class Application {
         "UPDATE application SET status = ?, processedDate = NOW() WHERE applicationID = ?;",
         [status, id]
       );
-      if (status == "approved") {
+      if (status == "unapproved") {
         await database.query(
-          "UPDATE room SET occupied = occupied + 1 WHERE roomID = 1;",
-          [roomID]
-        );
-      } else if (status == "unapproved") {
-        await database.query(
-          "UPDATE student SET application = 0 WHERE studentID = ?;",
-          [studentID]
+          `UPDATE student SET application = 0 WHERE studentID = ?;
+          UPDATE room SET occupied = occupied - 1 WHERE roomID = ?;`,
+          [studentID, roomID]
         );
       }
       return this.rowToArray(result);
