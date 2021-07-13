@@ -12,4 +12,4 @@ Admin credential : admin | admin
 Student credential : user1 | user1
 
 ## Installation guide
-Please refer to [here]()
+Please refer to [here](https://github.com/tanchonglim/CRAS-Angular/blob/main/CRAS_Installation_Manual.pdf)
